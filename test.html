@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medicine Finder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        flex-direction: column;
+        color: white;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        width: 400px;
+        text-align: center;
+        color: black;
+      }
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        padding: 10px;
+        width: 100%;
+        border: none;
+        background: #667eea;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      button:hover {
+        background: #555eea;
+      }
+      #result {
+        margin-top: 20px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Medicine Finder</h2>
+      <select id="disease">
+        <option value="">Select a Disease</option>
+      </select>
+      <button onclick="findMedicine()">Search</button>
+      <div id="result"></div>
+    </div>
+
+    <script>
+      const medicineData = {
+        Anemia: ["Ferrous Sulphate", "Folic Acid", "Cyanocobalamin"],
+        Hypertension: ["Amlodipine", "Atenolol", "Enalapril Maleate"],
+        Diabetes: ["Metformin", "Insulin", "Glibenclamide"],
+        "Pain Relief": ["Paracetamol", "Ibuprofen", "Diclofenac"],
+        Infection: ["Amoxicillin", "Ciprofloxacin", "Azithromycin"],
+        Tuberculosis: ["Isoniazid", "Rifampicin", "Ethambutol", "Pyrazinamide"],
+        Malaria: ["Chloroquine", "Artesunate", "Quinine Sulphate"],
+        Epilepsy: ["Carbamazepine", "Phenytoin", "Sodium Valproate"],
+        Allergy: ["Cetirizine", "Chlorpheniramine", "Hydrocortisone"],
+        Asthma: ["Salbutamol", "Beclomethasone", "Ipratropium Bromide"],
+        "Bladder Cancer": ["Mitomycin", "BCG Vaccine", "Cisplatin"],
+        "Chicken Pox": ["Acyclovir", "Paracetamol", "Calamine Lotion"],
+        "COVID-19": ["Remdesivir", "Dexamethasone", "Tocilizumab"],
+        Depression: ["Fluoxetine", "Sertraline", "Amitriptyline"],
+        Diarrhea: ["Oral Rehydration Salts", "Loperamide", "Zinc Sulphate"],
+        HIV: ["Zidovudine", "Lamivudine", "Efavirenz"],
+        Stress: ["Diazepam", "Alprazolam", "Buspirone"],
+        "Gastric Ulcer": ["Omeprazole", "Ranitidine", "Pantoprazole"],
+        "Heart Disease": ["Aspirin", "Atorvastatin", "Clopidogrel"],
+        Migraine: ["Paracetamol", "Dihydroergotamine", "Propranolol"],
+        Cancer: ["Methotrexate", "Cyclophosphamide", "Cisplatin"],
+        Poisoning: ["Activated Charcoal", "Atropine", "Sodium Thiosulphate"],
+      };
+
+      function populateDropdown() {
+        let select = document.getElementById("disease");
+        for (let disease in medicineData) {
+          let option = document.createElement("option");
+          option.value = disease;
+          option.textContent = disease;
+          select.appendChild(option);
+        }
+      }
+
+      function findMedicine() {
+        let disease = document.getElementById("disease").value;
+        let resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = "";
+
+        if (medicineData[disease]) {
+          let medicines = medicineData[disease].join(", ");
+          resultDiv.innerHTML = `<h3>Recommended Medicines:</h3><p>${medicines}</p>`;
+        } else {
+          resultDiv.innerHTML = `<p style='color:red;'>No data found. Try a different disease.</p>`;
+        }
+      }
+
+      window.onload = populateDropdown;
+    </script>
+  </body>
+</html>
